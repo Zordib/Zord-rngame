@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
-import StartGameScreen from './screens/StartGameScreen';
-import { LinearGradient } from 'expo-linear-gradient';
-import GameScreen from './screens/GameScreen';
-import Colors from './screens/components/constants/Colors';
-import GameOverScreen from './screens/GameOverScreen';
+import { useState } from "react";
+import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
+import StartGameScreen from "./screens/StartGameScreen";
+import { LinearGradient } from "expo-linear-gradient";
+import GameScreen from "./screens/GameScreen";
+import Colors from "./screens/components/constants/Colors";
+import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
@@ -16,51 +16,43 @@ export default function App() {
   }
 
   function gameOverHandler() {
-    setGameIsOver(true)
-
+    setGameIsOver(true);
   }
 
-  let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />
+  let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+    screen = (
+      <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+    );
   }
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />
-
+    screen = <GameOverScreen />;
   }
 
   return (
-
-    <LinearGradient colors={[Colors.accent500, Colors.primary700]} style={styles.rootScreen}>
+    <LinearGradient
+      colors={[Colors.accent500, Colors.primary700]}
+      style={styles.rootScreen}
+    >
       <ImageBackground
-        source={require('./assets/images/background.png')}
-        resizeMode='cover'
+        source={require("./assets/images/background.png")}
+        resizeMode="cover"
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-
-        <SafeAreaView style={styles.rootScreen}>
-          {screen}
-        </SafeAreaView>
-
+        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
-
   );
 }
 
 const styles = StyleSheet.create({
-
   rootScreen: {
     flex: 1,
   },
   backgroundImage: {
-    opacity: 0.18
-
-  }
-
-
-
+    opacity: 0.18,
+  },
 });
